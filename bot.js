@@ -59,7 +59,6 @@ client.on("message", msg => {
 
   } else if (msg.content.startsWith("!wiki")) {
     if (msg.content[5] == "-") {
-      console.log("language");
       var lang = msg.content.split(" ")[0].split("-")[1];
       if (!languages.includes(lang)) {
         msg.reply("Not a valid wikipedia language.\n\
@@ -73,7 +72,6 @@ See 'https://meta.wikimedia.org/wiki/Template:List_of_language_names_ordered_by_
       history[msg.author["id"]] = [query, 1, lang];
 
     } else if (msg.content[5] == " ") {
-      console.log("default");
       query = msg.content.slice(6);
       history[msg.author["id"]] = [query, 1, "en"];
       lang = "en";
@@ -85,7 +83,6 @@ See 'https://meta.wikimedia.org/wiki/Template:List_of_language_names_ordered_by_
       lang = "en";
     } else {
       lang = msg.content.slice(8);
-      console.log(lang);
     }
 
     if (!languages.includes(lang)) {
@@ -98,5 +95,4 @@ See 'https://meta.wikimedia.org/wiki/Template:List_of_language_names_ordered_by_
   }
 });
 
-console.log(process.env.BOT_TOKEN);
 client.login(process.env.BOT_TOKEN);
