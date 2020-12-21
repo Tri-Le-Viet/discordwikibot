@@ -98,4 +98,4 @@ See 'https://meta.wikimedia.org/wiki/Template:List_of_language_names_ordered_by_
   }
 });
 
-client.login("Nzg5MjY3NzcwOTQwMzI1OTU5.X9vk5A.6vMug-QyYlz_BrwkECHEvnD7NzQ");
+client.login("TOKEN GOES HERE");
