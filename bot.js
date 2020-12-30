@@ -3,7 +3,7 @@ const fetch = require("node-fetch");
 const client = new Discord.Client();
 const fs = require("fs");
 var history = {};
-const languages = fs.readFileSync("./language_codes.txt", "utf-8").split("\r\n");
+const languages = fs.readFileSync("./language_codes.txt", "utf-8").split("\n");
 var role;
 
 function searchWiki(msg, query, number, lang) {
@@ -86,6 +86,7 @@ See 'https://meta.wikimedia.org/wiki/Template:List_of_language_names_ordered_by_
     }
 
     if (!languages.includes(lang)) {
+      msg.reply(languages);
       msg.reply(languages.includes("en"));
       msg.reply("Not a valid wikipedia language.\n\
 See 'https://meta.wikimedia.org/wiki/Template:List_of_language_names_ordered_by_code' for a complete list of languages.");
