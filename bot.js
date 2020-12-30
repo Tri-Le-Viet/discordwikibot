@@ -82,7 +82,7 @@ See 'https://meta.wikimedia.org/wiki/Template:List_of_language_names_ordered_by_
     if (msg.content === "!random") {
       lang = "en";
     } else {
-      lang = msg.content.slice(8);!
+      lang = msg.content.slice(8);
     }
 
     if (!languages.includes(lang)) {
