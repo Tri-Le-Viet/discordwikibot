@@ -82,12 +82,12 @@ See 'https://meta.wikimedia.org/wiki/Template:List_of_language_names_ordered_by_
     if (msg.content === "!random") {
       lang = "en";
     } else {
-      lang = msg.content.slice(8);
+      lang = msg.content.slice(8);!
     }
 
     if (!languages.includes(lang)) {
       msg.reply("Not a valid wikipedia language.\n\
-See 'https://meta.wikimedia.org/wiki/Template:List_of_language_names_ordered_by_code' for a complete list of languages.");
+See 'https://meta.wikimedia.org/wiki/Template:List_of_language_names_ordered_by_code' for a complete list of languages." + lang);
         return;
     }
 
