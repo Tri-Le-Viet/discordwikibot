@@ -86,7 +86,7 @@ See 'https://meta.wikimedia.org/wiki/Template:List_of_language_names_ordered_by_
     }
 
     if (!languages.includes(lang)) {
-      msg.reply(languages);
+      msg.reply(languages.includes("en"));
       msg.reply("Not a valid wikipedia language.\n\
 See 'https://meta.wikimedia.org/wiki/Template:List_of_language_names_ordered_by_code' for a complete list of languages.");
         return;
