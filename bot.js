@@ -59,6 +59,7 @@ client.on("ready", () => {
 client.on("message", msg => {
   if (msg.mentions.has(client.user) && msg.content.toLowerCase().includes("config")) {
     command = msg.content.split("config")[1].substring(1);
+    msg.reply("The command character has been changed to : " + command + "\nE.g. " + command + "wiki Wikipedia");
 
   } else if (msg.content === command + "help") {
     msg.reply(help);
