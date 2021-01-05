@@ -100,7 +100,7 @@ See 'https://en.wikipedia.org/wiki/List_of_Wikipedias' for a complete list of su
 
     if (!languages.includes(lang)) {
       msg.reply("Not a valid wikipedia language.\n\
-See 'https://meta.wikimedia.org/wiki/Template:List_of_language_names_ordered_by_code' for a complete list of languages.");
+See 'https://en.wikipedia.org/wiki/List_of_Wikipedias' for a complete list of supported languages.");
     } else {
       randomArticle(msg, lang);
     }
