@@ -58,7 +58,7 @@ client.on("ready", () => {
 
 client.on("message", msg => {
   if (msg.mentions.has(client.user) && msg.content.toLowerCase().includes("config")) {
-    command = msg.content.split("config")[1][1];
+    command = msg.content.split("config")[1].substring(1);
 
   } else if (msg.content === command + "help") {
     msg.reply(help);
