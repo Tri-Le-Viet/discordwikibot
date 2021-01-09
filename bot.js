@@ -4,15 +4,20 @@ const client = new Discord.Client();
 const fs = require("fs");
 var history = {};
 var serverCommands = {};
-const languages = fs.readFileSync("./language_codes.txt", "utf-8").split("\n");
+const languages = fs.readFileSync("language_codes.txt", "utf-8").split("\n");
+console.log("1");
 
-const help = "```Wikibot ver 1.0.3\nTo change the command character, message the bot '@Wikibot config new_char'.\n\
+const help = "```Wikibot ver 1.0.4\nTo change the command character, message the bot '@Wikibot config new_char'.\n\
 By default it is set to '!'\n\nCommands:\n\
   !wiki query        searches Wikipedia for the article that is the closest match for 'query' (defaults to English)\n\
   !wiki-lang query   searches Wikipedia for the article in the specified language for the closest match to 'query'\n\
   !wikiNext          selects the next closest match for the last searched 'query'\n\
   !random            selects a random English Wikipedia article\n\
   !random lang       selects a random Wikipedia in the specified language```";
+
+
+
+
 
 function searchWiki(msg, query, number, lang, command) {
   var url = "https://" + lang + ".wikipedia.org/w/api.php?origin=*";
@@ -23,7 +28,6 @@ function searchWiki(msg, query, number, lang, command) {
       namespace: "0",
       format: "json"
   };
-
   Object.keys(params).forEach(function(key){url += "&" + key + "=" + params[key];});
   fetch(url)
       .then(function(response){return response.json();})
@@ -48,20 +52,31 @@ function randomArticle(msg, lang, command) {
     .catch(function(error){console.log(error);});
 }
 
+function changeSettings() {
+  fs.writeFileSync("serverSettings.txt", JSON.stringify(serverCommands), "utf-8");
+}
+
 client.on("ready", () => {
   console.log("Ready");
-  client.guilds.cache.forEach((guild) => {
-    serverCommands[guild.id] = "!"; // Defaults to '!'
-  });
+  var file = fs.readFileSync("serverSettings.txt");
+  serverCommands = JSON.parse(file.toString());
+  console.log(serverCommands);
+});
+
+client.on("guildCreate", guild => {
+  serverCommands[guild.id] = "!"; // Defaults to '!'
+  console.log(guild.name);
+  changeSettings();
 });
 
 client.on("message", msg => {
   var command = serverCommands[msg.guild.id];
 
   if (msg.mentions.has(client.user) && msg.content.toLowerCase().includes("config")) {
-    serverCommands[msg.guild.id] = msg.content.split("config")[1].substring(1);
-    command =  serverCommands[msg.guild.id]
+    command =  msg.content.split("config")[1].substring(1);
+    serverCommands[msg.guild.id] = command;
     msg.reply("The command character has been changed to : " + command + "\nE.g. " + command + "wiki Wikipedia");
+    changeSettings();
 
   } else if (msg.content === command + "help") {
     msg.reply(help);
