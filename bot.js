@@ -16,9 +16,6 @@ By default it is set to '!'\n\nCommands:\n\
   !random lang       selects a random Wikipedia in the specified language```";
 
 
-
-
-
 function searchWiki(msg, query, number, lang, command) {
   var url = "https://" + lang + ".wikipedia.org/w/api.php?origin=*";
   var params = {
